@@ -36,7 +36,7 @@ for (f in files) {
     headers = c("User-Agent" = "R Zenodo downloader")
   )
   
-  # Optional checksum verification when Zenodo provides MD5
+  # checksum verification
   if (!is.null(f$checksum) && startsWith(f$checksum, "md5:")) {
     expected_md5 <- sub("^md5:", "", f$checksum)
     actual_md5 <- digest(out_path, algo = "md5", file = TRUE)
