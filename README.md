@@ -1,6 +1,8 @@
 # Rcode
 Linking daily hydroclimatic extremes to long-term terrestrial watercycle trends
 
+# Download data
+
 # install.packages(c("jsonlite", "digest"))
 
 library(jsonlite)
@@ -34,19 +36,8 @@ for (f in files) {
     mode = "wb",
     quiet = FALSE,
     headers = c("User-Agent" = "R Zenodo downloader")
-  )
-  
-  # checksum verification
-  if (!is.null(f$checksum) && startsWith(f$checksum, "md5:")) {
-    expected_md5 <- sub("^md5:", "", f$checksum)
-    actual_md5 <- digest(out_path, algo = "md5", file = TRUE)
-    
-    if (!identical(expected_md5, actual_md5)) {
-      warning("Checksum mismatch for ", file_name)
-    } else {
-      message("Checksum OK: ", file_name)
-    }
+  )  
   }
-}
 
-message("Done. Files saved in: ", normalizePath(out_dir))
+message("Done")
+
