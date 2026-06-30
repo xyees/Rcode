@@ -88,6 +88,16 @@ for (file in rds_files) {
 
 # Check shapefiles
 
+shape_files <- list.files(
+  out_dir,
+  pattern = "\\.(shp|shx|dbf|prj)$",
+  full.names = TRUE,
+  recursive = TRUE,
+  ignore.case = TRUE
+)
+
+print(shape_files)
+
 if (length(shape_files) == 0) {
   message("No")
 } else {
