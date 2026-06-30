@@ -1,14 +1,9 @@
-# Rcode
-Linking daily hydroclimatic extremes to long-term terrestrial watercycle trends
-
-# Download data
-
-# install.packages(c("jsonlite", "digest"))
-
+# Load the package
 library(jsonlite)
-library(digest)
 
+# Zenodo data
 doi <- "10.5281/zenodo.20479866"
+
 record_id <- sub(".*zenodo\\.", "", doi)
 
 out_dir <- "zenodo_20479866"
@@ -16,10 +11,7 @@ dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
 
 api_url <- paste0("https://zenodo.org/api/records/", record_id)
 
-record <- fromJSON(
-  api_url,
-  simplifyVector = FALSE
-)
+record <- fromJSON(api_url, simplifyVector = FALSE)
 
 files <- record$files
 
@@ -34,10 +26,8 @@ for (f in files) {
     url = download_url,
     destfile = out_path,
     mode = "wb",
-    quiet = FALSE,
-    headers = c("User-Agent" = "R Zenodo downloader")
-  )  
-  }
+    quiet = FALSE
+  )
+}
 
 message("Done")
-
